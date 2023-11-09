@@ -1,0 +1,29 @@
+{% extends "baseblg.html" %}
+
+{% block content %}
+    <h1 class="card-title" style="margin-left: 50%; font-size: larger;">Finished Appointments</h1>
+    <div class="card" style="width: 50rem; text-align:flex-start; margin:10px 25%; padding:2%;">
+        <div class="card-body">
+            <ul>
+                {% for appointment in finished_appointments %}
+                    <li>
+                        <h3><strong>{{ appointment.title }}</strong></h3>
+                        <h5><strong>Client Name: </strong> {{ appointment.client_Name }}</h5>
+                        <p><strong>Date: </strong> {{ appointment.date }}</p>
+                        <p><strong>Time: </strong> {{ appointment.time }}</p>
+                        <p><strong>Description: </strong> {{ appointment.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <a href="#" class="btn-back" id="backButton" style="margin-left: 25%;">Back</a>
+    
+    <script>
+        // Add an event listener to the Back button
+        document.getElementById('backButton').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.history.back(); // Use JavaScript to go back to the previous page
+        });
+    </script>
+{% endblock %}

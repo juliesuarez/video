@@ -1,0 +1,41 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<style>
+    select {
+       padding: 10px;
+       width: 30%;
+   } 
+   /* Hide the default dropdown arrow for all select elements */
+
+
+
+   input[type="text"],
+   input[type="email"],
+   input[type="password"] {
+   border-radius: 8px; 
+   /* Adjust the radius value as needed */
+   border-color:#ddd;
+   width:70%
+   
+ 
+ }
+
+   </style>
+<strong><h1 class="card-title" style="margin-left: 50%; font-size: larger;">Edit Appointment</h1></strong>
+
+  <div class="card" style="width: 50rem; text-align:flex-start; margin:10px 25%; padding:2%;">
+    <div class="card-body">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+    </div>
+  </div>
+  <a href="{% url 'chat:user_appointments' %}" style="margin-left: 30%;">Cancel</a>
+</div>
+
+{% endblock %}
+

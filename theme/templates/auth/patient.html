@@ -1,0 +1,257 @@
+{% extends 'base2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+  /* main */
+  .main-container {
+    grid-area: main;
+    overflow-y: auto;
+    color: rgba(255, 255, 255, 0.95);
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .main-title {
+    display: flex;
+  }
+
+  .main-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    /* Adjust this value to control the space between cards */
+    margin: 50px 0;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    /* Adjust this value to reduce the padding within each card */
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Box shadow */
+    transition: transform 0.3s ease-in-out;
+    /* Add transition effect for transform property */
+  }
+
+  .cards:hover {
+    transform: scale(1.05);
+    /* Adjust the scale factor for the hover effect */
+  }
+
+  .cards:first-child {
+    background-color: #263043;
+    padding-left: 50px;
+  }
+
+  .cards:nth-child(2) {
+    background-color: #39baed;
+  }
+
+  .cards:nth-child(3) {
+    background-color: #2e7d23;
+  }
+
+
+
+  .card-inner {
+    display: flex;
+    align-items: center;
+
+  }
+
+  .card-inner>.material-icons-outlined {
+    font-size: 45px;
+
+  }
+
+  .charts {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 60px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .charts-card {
+    background-color: #263043;
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
+    border-radius: 5px;
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+  }
+
+  .chart-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+</style>
+
+<main class="main-container">
+  <div class="main-title">
+    <strong>
+      <h2>DASHBOARD</h2>
+    </strong>
+  </div>
+
+
+  <div class="main-cards">
+    <div class="cards">
+      <div class="card-inner">
+        <a href="{% url 'chat:create_appointment' %}" style="color: white;">Create Appointment</a>
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card-inner">
+        <a href="/" style="color: white;">Chat</a>
+
+      </div>
+    </div>
+    <div class="cards">
+      <div class="card-inner">
+        <a href="{% url 'chat:user_appointments' %}" class="btn float-right" style="color: white;">My Appointment</a>
+      </div>
+
+    </div>
+
+    <div class="cards">
+      <div class="card-inner">
+        <a href="{% url 'chat:view_appointment_slots' %}" class="btn float-right" style="color: white;">Available Therapists</a>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</main>
+</div>
+<div class="list-group list-group-flush list-group-formset" style="width: 80%; margin: 0 auto;">
+
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-10">
+        <a href=""></a>
+      </div>
+      <div class="col-2">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="list-group-item text-center">
+    <p class="text-muted font-italic mb-0">You haven't paid yet? Go ahead and make the first payment.
+    </p>
+    <div class="card-footer">
+      <a href="" class="btn btn-primary btn-sm">Make payment</a>
+    </div>
+
+  </div>
+
+</div>
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    <strong>
+      <h1>All Tips</h1>
+    </strong>
+  </div>
+  <div class="card-body">
+    <div class="filter-form">
+      <form method="get" action="{% url 'chat:post_list' %}">
+        <label for="tip_type">Select Tip Type:</label>
+        <select name="tip_type" id="tip_type">
+          <option value="">All</option>
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          <option value="month">Month</option>
+        </select>
+
+        <button type="submit" style="background-color: #33aaff;" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+
+    <!-- Day Tips -->
+    <ul>
+      {% if not request.GET.tip_type or 'day' in request.GET.tip_type %}
+      <li><strong>Day Tips:</strong></li>
+      {% for post in posts %}
+      {% if post.tip_type == 'day' %}
+      <li style="color: #33aaff;">
+        <a href="{% url 'chat:post_detail' post.pk %}">{{ post.title }}</a>
+        (Created by: {{ post.created_by.username }})
+      </li>
+      {% endif %}
+      {% empty %}
+      <li class="empty-message">No day tips available.</li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+
+    <!-- Week Tips -->
+    <ul>
+      {% if not request.GET.tip_type or 'week' in request.GET.tip_type %}
+      <li><strong>Week Tips:</strong></li>
+      {% for post in posts %}
+      {% if post.tip_type == 'week' %}
+      <li style="color: #33aaff;">
+        <a href="{% url 'chat:post_detail' post.pk %}" style="color: #33aaff;">{{ post.title }}</a>
+        (Created by: {{ post.created_by.username }})
+      </li>
+      {% endif %}
+      {% empty %}
+      <li class="empty-message">No week tips available.</li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+
+    <!-- Month Tips -->
+    <ul>
+      {% if not request.GET.tip_type or 'month' in request.GET.tip_type %}
+      <li><strong>Month Tips:</strong></li>
+      {% for post in posts %}
+      {% if post.tip_type == 'month' %}
+      <li style="color: #33aaff;">
+        <a href="{% url 'chat:post_detail' post.pk %}">{{ post.title }}</a>
+        (Created by: {{ post.created_by.username }})
+      </li>
+      {% endif %}
+      {% empty %}
+      <li class="empty-message">No month tips available.</li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+<!--  -->

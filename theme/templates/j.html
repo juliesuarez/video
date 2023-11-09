@@ -1,0 +1,122 @@
+{% extends 'base3.html' %}
+
+{% block content %}
+
+<style>
+    /* TikTok-like comment form styles */
+    .tiktok-comment-form {
+        display: none;
+        margin-top: 20px;
+    }
+
+    .tiktok-comment-input {
+        width: 80%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .tiktok-comment-button {
+        background-color: #0091ea; /* TikTok's primary color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .tiktok-comment-button:hover {
+        background-color: #007acc; /* Adjust to match TikTok's hover color */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card-header {
+        text-align: center;
+        background-color: #33aaff;
+        color: black;
+        padding: 10px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        max-width: 600px; /* Limit the maximum width of the card */
+        margin: 0 auto; /* Center the card horizontally */
+        padding: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 5vh;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        padding: 10px;
+    }
+</style>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h1>{% if form.instance.pk %}Update Post{% else %}Empowering Your Journey{% endif %}</h1>
+    </div>
+    <div class="card-body">
+        <form method="post"  enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.title.id }}">{{ form.title.label_tag }}</label>
+                <input type="text" name="{{ form.title.name }}" id="{{ form.title.id }}" class="form-control" placeholder="Title" required style="background: white;">
+            </div>
+            <div class="form-group">
+                <label for="{{ form.post_type.id }}">{{ form.post_type.label_tag }}</label>
+                <select name="{{ form.post_type.name }}" id="{{ form.post_type.id }}" class="form-control">
+                    <option value="select post type">Select post type</option>
+                    <option value="video">Video</option>
+                    <option value="picture">Picture</option>
+                    <option value="article">Article</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.tip_type.id }}">{{ form.tip_type.label_tag }}</label>
+                <select name="{{ form.tip_type.name }}" id="{{ form.tip_type.id }}" class="form-control">
+                    <option value="select tip time">Select tip time</option>
+                    <option value="video">Day</option>
+                    <option value="picture">Week</option>
+                    <option value="article">Month</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.content.id }}">{{ form.content.label_tag }}</label>
+                <textarea name="{{ form.content.name }}" id="{{ form.content.id }}" class="form-control" placeholder="Article" required style="height: 30vh"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.video.id }}">Video</label>
+                <input type="file" name="{{ form.video.name }}" id="{{ form.video.id }}" class="form-control" accept="video/*" placeholder="Video">
+            </div>
+            <div class="form-group">
+                <label for="{{ form.picture.id }}">Picture</label>
+                <input type="file" name="{{ form.picture.name }}" id="{{ form.picture.id }}" class="form-control" accept="image/*" placeholder="Picture">
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color:#33aaff; margin-left: 30%; width:200px;">
+                {% if form.instance.pk %}Update{% else %}Create{% endif %} Post
+            </button>
+        </form>
+    </div>
+</div>
+<br><br>
+
+{% endblock content %}

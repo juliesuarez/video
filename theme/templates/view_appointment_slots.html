@@ -1,0 +1,19 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+    <h1>Appointment Slots</h1>
+    <ul>
+        {% for slot in appointment_slots %}
+        
+            <li>Therapist:{{ slot.therapist }} </li>
+              <li> Time: {{ slot.time_slot }} </li> 
+              <li>  Location: {{ slot.location }} </li>
+              <li>  My service: {{ slot.my_service }} </li>
+
+              <br>
+        {% empty %}
+            <li>No appointment slots available.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

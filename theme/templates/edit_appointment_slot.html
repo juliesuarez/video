@@ -1,0 +1,20 @@
+{% extends "baseblg.html" %}
+
+{% block content %}
+    <h1>Edit Appointment Slot</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="#" class="btn-back" id="backButton" style="margin-left: 25%;">Back</a>
+
+<script>
+    // Add an event listener to the Back button
+    document.getElementById('backButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.history.back(); // Use JavaScript to go back to the previous page
+    });
+</script>
+{% endblock %}

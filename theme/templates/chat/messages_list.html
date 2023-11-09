@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block contacts %}
+{% for message in messages_list %}
+
+{% for us in other_users %}
+{% if us.pk == message.recipient.pk or us.pk == message.sender.pk  %}
+<!-- contact box 1-->
+<div class="mb-1 bg-slate-300 h-16 flex flex-row border-y border-slate-600 cursor-pointer active:bg-slate-700"
+    onclick="location.href='{% url 'chat:inbox' us %}';">
+    <!-- user image -->
+    {% if us.profile.profile_picture %}
+    <img src="{{ us.profile.profile_picture.url }}" alt="{{ us.username }}'s Profile Picture"
+        class="img-fluid rounded-circle profile-picture">
+    {% else %}
+    <img src="{% static 'img/default.jpg' %}" alt="Default Profile Picture"
+        class="img-fluid rounded-circle profile-picture">
+    {% endif %}
+    <!-- user image end -->
+
+    <!-- username and message-->
+    <div class="flex flex-col flex-nowrap overflow-y-scroll overflow-x-hidden ml-4 my-1 mx-auto text-start space-x-1 truncate">
+        <!-- username -->
+        <p class="text-black text-lg text-left font-semibold font-sans">
+            {{us}}
+        </p>
+        <!-- username end -->
+
+        <!-- message -->
+        <p class="text-center font-medium text-slate-500 truncate">
+            {{message.message}}
+        </p>
+        <!-- message end -->
+
+        <!-- Display uploaded file or image -->
+        {% if message.file_upload %}
+        {% with message.file_upload.name|lower as file_name %}
+          {% if file_name|slice:"-4:" %}
+            <img src="{{ message.file_upload.url }}" alt="Image" class="my-2 max-w-xs">
+          {% else %}
+            <a href="{{ message.file_upload.url }}" download class="my-2">{{ message.file_upload.name }}</a>
+          {% endif %}
+        {% endwith %}
+      {% endif %}
+        <!-- End file or image display -->
+    </div>
+    <!-- username and message end -->
+
+    <!-- grow div -->
+    <div class="grow"></div>
+    <!-- grow div end -->
+
+    <!-- date -->
+    <small class="justify-self-end text-gray-600 mr-4 mt-3 text-base">
+        <time datetime="2020-01-01">
+            {{message.date|date:"m/d/Y" }}
+        </time>
+    </small>
+    <!-- date end -->
+
+</div>
+<!-- contact box 1 end  -->
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
+
+{% block message %}
+<div class="h-[600px]" style="background-color: #c2d4d8;">
+
+    <!-- No messages yet alert -->
+    <div class="flex h-full w-full">
+        <div class="rounded-md font-medium">
+            <!-- image -->
+            <img class="flex h-full w-full" src="{% static '/img/welcome_img.png' %}" alt="Welcome"
+                style="border-radius: 60%;">
+            <!-- image end -->
+        </div>
+    </div>
+    <!-- No messages yet alert end -->
+</div>
+<style>
+    h1 {
+        color: white;
+    }
+
+    .profile-picture {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    #id_profile_picture {
+        margin-left: 50px;
+        height: 60px;
+    }
+</style>
+
+{% endblock %}

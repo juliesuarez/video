@@ -1,0 +1,361 @@
+.logo {
+  font-family: 'Clicker Script', cursive;
+}
+
+.logo a {
+  color: #212529;
+  text-decoration: none;
+}
+
+footer {
+  font-size: .9rem;
+}
+
+footer a {
+  color: #212529;
+}
+
+.list-group-formset label {
+  display: none;
+}
+
+.list-group-formset .form-group,
+.list-group-formset .invalid-feedback {
+  margin-bottom: 0;
+}
+
+.list-group-formset .form-control {
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+}
+
+.btn-student {
+  color: #fff;
+  background-color: #91afb6;
+  border-color: #91afb6;
+}
+
+.btn-student:hover,
+.btn-student:active {
+  color: #fff;
+  background-color: #608993;
+  border-color: #608993;
+}
+
+.btn-teacher {
+  color: #fff;
+  background-color: #8980a5;
+  border-color: #8980a5;
+}
+
+.btn-teacher:hover,
+.btn-teacher:active {
+  color: #fff;
+  background-color: #66598B;
+  border-color: #66598B;
+}
+
+.has-danger .radio,
+.has-danger .checkbox {
+  color: #dc3545;
+}
+
+.has-danger .invalid-feedback {
+  display: block;
+}
+.Van{
+  /* display:flex; */
+  padding-top:50px;
+  background-color: #121314;
+  color: white;
+  margin-top: auto;
+  position: absolute;
+  width: 100%;
+  margin-bottom: 0;
+  }
+
+
+  /* Style for the card */
+.card {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Style for the card header */
+.card-header h1 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the card body */
+.card-body {
+  margin-top: 20px;
+}
+
+/* Style for the like and comment section */
+.like-comment-section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.like-button {
+  text-decoration: none;
+  color: #333;
+  margin-right: 10px;
+}
+
+.like-button:hover {
+  color: #ff5733;
+  /* Change this to your desired color */
+}
+
+.like-count {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.comment-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.comment-icon i {
+  color: #333;
+}
+
+.comment-icon i:hover {
+  color: #33aaff;
+  /* Change this to your desired color */
+}
+
+#comments-heading {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Style for the comments list */
+#comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#comments-list li {
+  margin-bottom: 10px;
+}
+
+/* Style for the comment form */
+#commentForm {
+  margin-top: 20px;
+  display: none;
+}
+
+#commentForm button {
+  background-color: #33aaff;
+  /* Change this to your desired color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#commentForm button:hover {
+  background-color: #007acc;
+  /* Change this to your desired color */
+}
+
+/* Style for the "Create a new post" button */
+.btn-create {
+  display: inline-block;
+  background-color: #33aaff;
+  /* Change this to your desired color */
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.btn-create:hover {
+  background-color: #007acc;
+  /* Change this to your desired hover color */
+}
+
+/* Style for the list */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+/* TikTok-like comment form styles */
+
+.tiktok-comment-form {
+  display: none;
+  margin-top: 20px;
+  width: 40%;
+}
+
+.tiktok-comment-input {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.tiktok-comment-button {
+  background-color: #0091ea;
+  /* TikTok's primary color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.tiktok-comment-button:hover {
+  background-color: #007acc;
+  /* Adjust to match TikTok's hover color */
+}
+
+
+/* Style for the "Back to Post List" button */
+.btn-back {
+  display: inline-block;
+  background-color: #33aaff;
+  /* Change this to your desired color */
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.btn-back:hover {
+  background-color: #007acc;
+  /* Change this to your desired hover color */
+}
+
+
+
+/* Style the filter form container */
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+
+/* Style the label for the dropdown */
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Style the dropdown select */
+select {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Style the filter button */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Style the lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Style list items */
+ul li {
+  margin: 10px 0;
+}
+
+/* Style strong elements (for headings) */
+strong {
+  font-weight: bold;
+}
+
+/* Style the links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+
+
+/* Style form elements */
+form {
+  margin-top: 20px;
+}
+
+/* Style form labels */
+label {
+  font-weight: bold;
+}
+
+
+/* Style form input fields */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  /* border: 1px solid #ddd; */
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Style form textarea without resizable border */
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  resize: none; /* Prevent resizing */
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border-radius: 8px; 
+  /* Adjust the radius value as needed */
+  border-color:gray;
+  /* background-color: #efefef; */
+  width:90%
+  
+
+}

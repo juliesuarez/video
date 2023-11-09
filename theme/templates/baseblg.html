@@ -1,0 +1,143 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}MindLyfe{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"   />
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    {% if user.is_authenticated and user.is_teacher %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/teachers.css' %}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/students.css' %}">
+    {% endif %}
+</head>
+
+<body style="background-color: #c2d4d8;overflow-x: hidden; ">
+    <style>
+        .navbar-nav .nav-item .nav-link:hover {
+        color: #007bff;
+        }
+    </style>
+  <div>
+    <nav style="background-color: black; max-height: 80px;">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'img/MindLyfe.png' %}" id="mind1" style="max-height: 40px; max-width: 50px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:post_create' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-edit fa-2x card-icon"></i>
+                                            Create Article
+                                        </h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:user_appointments' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-calendar-alt fa-2x card-icon"></i>
+                                            Appointments</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:post_list' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-newspaper fa-2x card-icon"></i>
+                                            Articles</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-envelope fa-2x card-icon"></i>
+                                            Messages</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:create-appointment-slot' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-clock fa-2x card-icon"></i>
+                                            Schedule</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:available_therapists' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-calendar fa-2x card-icon"></i>
+                                            My Schedule</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'chat:finished_appointments' %}">
+                                        <h5 class="card-title" style="color: white;">
+                                            <i class="fas fa-check-circle fa-2x card-icon"></i>
+                                            Finished Appointments</h5>
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" style="color: white;">
+                                Logged in as {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                                <li><a class="dropdown-item" href="#">View Profile</a></li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success" role="button">Log in</a>
+                <a href="" class="btn btn-primary" role="button">Sign up</a>
+                {% endif %}
+            </div>
+        </nav>
+    </nav>
+
+    {% block content %}{% endblock %}
+</div>
+
+    <div class="Van" style="margin-top: 120px;">
+        <footer class="py-3 bg-grey">
+            <p class="m-0 text-white text-center">Copyright &copy; MindLyfe</p>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+</body>
+
+</html>

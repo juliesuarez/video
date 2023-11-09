@@ -1,0 +1,63 @@
+{% extends 'baseblg.html' %}
+
+{% block content %}
+
+<style>
+    /* TikTok-like comment form styles */
+
+.tiktok-comment-form {
+    display: none;
+    margin-top: 20px;
+}
+
+.tiktok-comment-input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.tiktok-comment-button {
+    background-color: #0091ea; /* TikTok's primary color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tiktok-comment-button:hover {
+    background-color: #007acc; /* Adjust to match TikTok's hover color */
+}
+</style>
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+            <h1>{% if form.instance.pk %}Update Post{% else %}Create Post{% endif %}</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary" style="background-color:#33aaff;">{% if form.instance.pk %}Update{% else %}Create{% endif %} Post</button>
+            </form>
+            
+        </div>
+    </div>
+
+    <a href="#" class="btn-back" id="backButton" style="margin-left: 130px;">Back</a>
+
+    <script>
+        // Add an event listener to the Back button
+        document.getElementById('backButton').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.history.back(); // Use JavaScript to go back to the previous page
+        });
+    </script>
+
+
+
+{% endblock content %}

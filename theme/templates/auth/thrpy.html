@@ -1,0 +1,167 @@
+{% extends 'baseblg.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    /* main */
+    .main-container {
+        grid-area: main;
+        overflow-y: auto;
+        padding: 20px;
+        color: rgba(255, 255, 255, 0.95);
+        /* display: flex;
+        flex-direction: row; */
+    }
+
+    .main-title {
+        display: flex;
+    }
+
+    .main-cards {
+        display: flex;
+        /* Change from grid to flex */
+        gap: 10px;
+        margin: 50px 0;
+    }
+
+    .cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 15px;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        /* Adjust card width as needed */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+
+    .cards:hover {
+        transform: scale(1.05);
+        /* Adjust the scale factor for the hover effect */
+    }
+
+    .cards:first-child {
+        background-color: #263043;
+        padding-left: 50px;
+    }
+
+    .cards:nth-child(2) {
+        background-color: #39baed;
+    }
+
+    .cards:nth-child(3) {
+        background-color: #2e7d23;
+    }
+
+    .cards:nth-child(4) {
+        background-color: rgb(185, 213, 238);
+
+
+    }
+
+    .card-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card-inner>.material-icons-outlined {
+        font-size: 45px;
+
+    }
+
+    .charts {
+        display: flex;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 60px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .charts-card {
+        background-color: #263043;
+        margin-bottom: 20px;
+        padding: 25px;
+        box-sizing: border-box;
+        -webkit-column-break-inside: avoid;
+        border-radius: 5px;
+        box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+    }
+
+    .chart-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+</style>
+
+<!-- 
+<main class="main-container">
+    <div class="main-title">
+        <strong>
+            <h2>DASHBOARD</h2>
+        </strong>
+    </div>
+    <div class="main-cards">
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:post_create' %}">Create Tips</a>
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:user_appointments' %}">My Appointments</a>
+
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:post_list' %}">All Tips</a>
+            </div>
+
+        </div>
+
+        <div class="cards">
+            <div class="card-inner">
+                <a href="/">Chat</a>
+
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:create-appointment-slot' %}">Schedule</a>
+
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:available_therapists' %}">My Schedule</a>
+
+            </div>
+        </div>
+        <div class="cards">
+            <div class="card-inner">
+                <a href="{% url 'chat:finished_appointments' %}">Finished Appointments</a>
+
+            </div>
+        </div>
+
+
+    </div>
+</main> -->
+{% endblock %}

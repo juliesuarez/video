@@ -1,0 +1,85 @@
+{% extends "baseblg.html" %}
+
+{% block content %}
+<br>
+<strong><h1 style="display: flex; align-items: center; justify-content: center; font-size: larger;">Your Appointment Slots</h1></strong>
+<div class="card" style="font-family: 'Times New Roman', Times, serif; color: black;">
+    <div class="card-body">
+        <ul>
+            {% for slot in appointmentslots %}
+            <li>
+                <h2>Therapist: {{ user.username }}</h2>
+                <ul>
+                    <li>Time Slot: {{ slot.time_slot }}</li>
+                    <li>My Location: {{ slot.location }}</li>
+                    <li>My Service: {{ slot.my_service }}</li>
+                    <li>Therapist Category: {{ slot.therapist_category }}</li>
+                    <li>Therapist Type: {{ slot.therapist_type }}</li>
+                    <ul>
+                        {% for condition in slot.conditions.all %}
+                          <li>{{ condition.name }}</li>
+                        {% endfor %}
+                      </ul>
+                    <!-- <li>Conditions treated: -->
+                      <!-- <ul class="conditions-list" id="conditions-list-{{ forloop.counter }}">
+                          <li>
+                              {{ slot.adhd }} Attention Deficit Hyperactivity Disorder (ADHD),
+                              {{ slot.anger_issues }} Anger Issues,
+                              {{ slot.anxiety_disorders }} Anxiety Disorders or Excessive Worries,
+                              {{ slot.bipolar_disorder }} Bipolar Disorder,
+                              {{ slot.child_behavior_problems }} Child Behavior Problems,
+                              {{ slot.ocd }} Obsessions and Compulsions (OCD),
+                              {{ slot.depression }} Depression,
+                              {{ slot.grief }} Grief,
+                              {{ slot.eating_disorders }} Eating Disorders,
+                              {{ slot.insomnia }} Insomnia,
+                              {{ slot.phobias }} Phobias,
+                              {{ slot.stress }} Stress,
+                              {{ slot.procrastination }} Procrastination,
+                              {{ slot.substance_misuse }} Substance Misuse / Substance Use Disorders,
+                              {{ slot.trauma }} Trauma / Post Traumatic Stress,
+                              {% if user.therapist_category == "Psychoanalysis" or user.therapist_category == "Psychodynamic" or user.therapist_category == "Therapy" %}
+                              {{ slot.identity_problems }} Identity Problems,
+                              {{ slot.self_esteem_issues }} Self Esteem Issues,
+                              {{ slot.self_assertion }} Self-Assertion,
+                              {{ slot.psychosomatic_disorders }} Psychosomatic Disorders,
+                              {{ slot.relationship_issues }} Relationship Issues,
+                              {{ slot.self_destructive_behavior }} Self-Destructive Behavior,
+                              {{ slot.sexual_problems }} Sexual Problems
+                              {% endif %}
+                          </li> 
+                       </ul> -->
+                    <!-- </li>   -->
+                </ul>
+                <form method="post" action="{% url 'chat:edit_appointment_slot' slot_id=slot.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="slot_id" value="{{ slot.id }}">
+                    <button type="submit">Edit</button>
+                </form>
+            </li>
+            {% empty %}
+            <p>No available therapists found.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<a href="#" class="btn-back" id="backButton" style="margin-left: 25%;">Back</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var expandButtons = document.querySelectorAll('.expand-button');
+        expandButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var targetId = button.getAttribute('data-target');
+                var target = document.getElementById(targetId);
+                target.style.display = (target.style.display === 'none' || target.style.display === '') ? 'block' : 'none';
+            });
+        });
+
+        document.getElementById('backButton').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.history.back();
+        });
+    });
+</script>
+{% endblock %}

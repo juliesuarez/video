@@ -1,0 +1,14 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h3>Submitted Appointment Slot</h3>
+    <strong>Therapist: {{ appointment_slot.therapist.username }}</strong><br>
+    Start Time: {{ appointment_slot.start_time }}<br>
+    End Time: {{ appointment_slot.end_time }}<br>
+  </div>
+</div>
+<a href="{% url 'chat:create_appointment_slot' %}" class="btn btn-primary">Create Appointment Slot</a>
+</div>
+{% endblock %}

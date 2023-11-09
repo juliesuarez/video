@@ -1,0 +1,33 @@
+{% extends "baseblg.html" %}
+
+{% block content %}
+<div class="card" style="width: 70%; margin: 0 auto; padding: 20px; background-color: #f0f0f0; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="text-align: center; color: #333;">Appointment Slot Form</h1>
+    <form method="post" action="{% url 'chat:create-appointment-slot' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="background-color: #007bff; color: #fff; border: none;">Submit</button>
+    </form>
+    <a href="#" class="btn btn-back" id="backButton" style="background-color: #ccc; color: #333; border: none; margin-top: 10px; text-decoration: none; padding: 10px 20px; display: inline-block; border-radius: 5px;">Back</a>
+</div>
+
+<style>
+    .btn {
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        color: #fff;
+    }
+</style>
+
+<script>
+    // Add an event listener to the Back button
+    document.getElementById('backButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.history.back(); // Use JavaScript to go back to the previous page
+    });
+</script>
+{% endblock %}

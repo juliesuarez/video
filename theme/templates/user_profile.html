@@ -1,0 +1,77 @@
+{% extends 'baseblg.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center">
+    <h1>Welcome, {{ user.username|capfirst }}</h1>
+
+    <div class="card mt-4 mb-4" style="margin: 0 auto; width: 80%;">
+        <div class="card-header">
+            <h2>Your Profile</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    {% if user_profile.profile_picture %}
+                    <img src="{{ user_profile.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture"
+                        class="img-fluid rounded-circle profile-picture">
+                    {% else %}
+                    <img src="{% static 'img/default.jpg' %}" alt="Default Profile Picture"
+                        class="img-fluid rounded-circle profile-picture">
+                    <p>No profile picture uploaded yet.</p>
+                    {% endif %}
+                    <button id="edit-username-button" class="btn btn-primary">Edit Username</button>
+                    <br>
+                    <!-- Edit Username Form (Initially hidden) -->
+                    <form method="post" id="edit-username-form" style="display: none;">
+                        {% csrf_token %}
+                        {{ username_form.as_p }}
+                        <button type="submit" class="btn btn-primary">Save Username</button>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <!-- Edit Profile Picture Form (You can keep this as-is) -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Update Profile Picture</button>
+                    </form>
+                    <br>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    h1 {
+        color: white;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    #id_profile_picture {
+        margin-left: 50px;
+        height: 60px;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#edit-username-button').click(function () {
+            $('#edit-username-form').toggle();
+        });
+    });
+</script>
+</div>
+{% endblock %}

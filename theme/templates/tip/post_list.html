@@ -1,0 +1,155 @@
+{% extends 'baseblg.html' %}
+
+{% block content %}
+<style>
+    .filter-form {
+        display: block;
+        align-items: center;
+        justify-content: center;
+        width: inherit;
+    }
+
+    li {
+        color: white;
+    }
+
+    a {
+        color: white;
+    }
+
+    .card-3d {
+        font-family: "Times New Roman", Times, serif;
+        color: aliceblue;
+        transform: perspective(1000px) rotateY(20deg);
+        transition: transform 0.5s;
+    }
+
+    #trinity {
+        width: 60%;
+        height: 30%;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+<br />
+<div class="card">
+    <div class="card-header">
+        <strong><h1>All Tips</h1></strong>
+    </div>
+    <div class="card-body">
+        <div class="text-center">
+            <div class="card" style="background-color: #c2d4d8" id="trinity">
+                <div class="card-header">
+                    <label for="tip_type">Select Tip Type:</label>
+                </div>
+                <div class="card-body">
+                    <div class="filter-form">
+                        <form method="get" action="{% url 'chat:post_list' %}">
+                            <select name="tip_type" id="tip_type">
+                                <option value="">All</option>
+                                <option value="day">Day</option>
+                                <option value="week">Week</option>
+                                <option value="month">Month</option>
+                            </select>
+                            <button type="submit" style="background-color: #33aaff" class="btn btn-primary">
+                                Filter
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Day Tips Card -->
+                <div class="card-3d" style="background-color: #263043; font-family: 'Times New Roman', Times, serif; color: aliceblue;">
+                    <div class="card-header">
+                        <strong><h2>Day Tips</h2></strong>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {% if not request.GET.tip_type or 'day' in request.GET.tip_type %}
+                                <!-- Day Tips Content Here -->
+                                {% for post in posts %}
+                                    {% if post.tip_type == 'day' %}
+                                        <li>
+                                            <a href="{% url 'chat:post_detail' post.pk %}">{{ post.title }}</a>
+                                            (Created by: {{ post.created_by.username }})
+                                        </li>
+                                    {% endif %}
+                                {% empty %}
+                                    <li class="empty-message">No day tips available.</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Week Tips Card -->
+                <div class="card-3d" style="background-color: #33aaff; font-family: 'Times New Roman', Times, serif; color: aliceblue;">
+                    <div class="card-header">
+                        <strong><h2>Week Tips</h2></strong>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {% if not request.GET.tip_type or 'week' in request.GET.tip_type %}
+                                <!-- Week Tips Content Here -->
+                                {% for post in posts %}
+                                    {% if post.tip_type == 'week' %}
+                                        <li>
+                                            <a href="{% url 'chat:post_detail' post.pk %}">{{ post.title }}</a>
+                                            (Created by: {{ post.created_by.username }})
+                                        </li>
+                                    {% endif %}
+                                {% empty %}
+                                    <li class="empty-message">No week tips available.</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Month Tips Card -->
+                <div class="card-3d" style="background-color: #2e7d23; font-family: 'Times New Roman', Times, serif; color: aliceblue;">
+                    <div class="card-header">
+                        <strong><h2>Month Tips</h2></strong>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            {% for post in posts %}
+                                {% if post.tip_type == 'month' %}
+                                    <li>
+                                        <a href="{% url 'chat:post_detail' post.pk %}">{{ post.title }}</a>
+                                        (Created by: {{ post.created_by.username }})
+                                    </li>
+                                {% endif %}
+                            {% empty %}
+                                <li class="empty-message">No month tips available.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#" class="btn-back" id="backButton" style="margin-left: 130px">Back</a>
+
+<script>
+    // Add an event listener to the Back button
+    document.getElementById("backButton").addEventListener("click", function (e) {
+        e.preventDefault();
+        window.history.back(); // Use JavaScript to go back to the previous page
+    });
+</script>
+
+{% endblock %}

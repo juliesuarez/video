@@ -1,0 +1,98 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<style>
+    select {
+        padding: 10px;
+        width: 20%;
+    }
+
+    /* Hide the default dropdown arrow for all select elements */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        border-radius: 8px;
+        border-color: #ddd;
+        width: 70%;
+    }
+</style>
+
+<h2 style="margin-left: 40%;">Create Appointment</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post" id="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <label for="paymentMethod">Select Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod">
+                <option value="mobile_money">Mobile Money</option>
+                <option value="airtel_money">Airtel Money</option>
+            </select>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+
+<a href="#" class="btn-back" id="backButton" style="margin-left: 130px;">Back</a>
+
+<script>
+    // Add an event listener to the Back button
+    document.getElementById('backButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.history.back(); // Use JavaScript to go back to the previous page
+    });
+
+    // Add an event listener to the form submission
+    document.getElementById('form').addEventListener('submit', async function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Get the selected payment method
+        const selectedPaymentMethod = document.getElementById('paymentMethod').value;
+
+        // Display a dialog box to confirm the payment method
+        const confirmed = confirm(`You've selected ${selectedPaymentMethod} as your payment method. Proceed with payment?`);
+
+        if (confirmed) {
+            // Make an API request to process the payment
+            const paymentResult = await processPayment(selectedPaymentMethod);
+
+            if (paymentResult.success) {
+                // Payment was successful, submit the form
+                this.submit();
+            } else {
+                // Handle payment failure, show an error message, or take appropriate action
+                alert('Payment failed. Please try again.');
+            }
+        }
+    });
+
+    async function processPayment(paymentMethod) {
+        // Replace with your actual API endpoint for payment processing
+        const apiUrl = 'https://your-payment-api.com/process-payment';
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                body: JSON.stringify({ paymentMethod }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data; // Modify this to match your API response format
+            } else {
+                throw new Error('Failed to process payment');
+            }
+        } catch (error) {
+            console.error('Payment processing error:', error);
+            return { success: false };
+        }
+    }
+</script>
+{% endblock %}

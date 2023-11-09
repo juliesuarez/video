@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block contacts %}
+
+{% for u in users %}
+<!-- contact box 1-->
+<div class="mb-1 bg-slate-300 h-16 flex flex-row border-y border-slate-600 cursor-pointer"
+    onclick="location.href='{% url 'chat:inbox' u %}';">
+    <!-- user image -->
+    <img src="{{ u.profile.profile_picture.url }}" alt="{{ u.username }}'s Profile Picture"
+        class="img-fluid rounded-circle profile-picture">
+    <!-- user image end -->
+
+    <!-- username -->
+    <p class="text-black text-lg text-left font-semibold font-sans">
+        {{ u.username }}
+    </p>
+    <!-- username end -->
+</div>
+<!-- contact box 1 end -->
+{% endfor %}
+
+{% endblock %}
+
+{% block message %}
+<div class="h-[600px]" style="background-color: #c2d4d8;">
+
+    <!-- No messages yet alert -->
+    <div class="flex h-full w-full">
+        <div class="rounded-md font-medium">
+            <!-- image -->
+            <img class="flex h-full w-full" src="{% static '/img/welcome_img.png' %}" alt="Welcome"
+                style="border-radius: 60%;">
+            <!-- image end -->
+        </div>
+    </div>
+    <!-- No messages yet alert end -->
+</div>
+<style>
+    h1 {
+        color: white;
+    }
+
+    .profile-picture {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    #id_profile_picture {
+        margin-left: 50px;
+        height: 60px;
+    }
+</style>
+
+{% endblock %}
